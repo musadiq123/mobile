@@ -9,6 +9,7 @@ import React, {useEffect, useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   Button,
+  FlatList,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -45,14 +46,20 @@ function App(): React.JSX.Element {
     };
   }, []);
 
-  const ChatMessages = messages.map((msg:any,  i: any) =><Text key={i}>{msg}</Text>)
-
+  const Item = ({item}: any) => (
+    <Text key={item}>{item}</Text>
+  );
   return (
     <SafeAreaView>
       <View>
-        {messages.map((msg: any, i: any) => (
+        {/* {messages.map((msg: any, i: any) => (
           <Text key={i}>{msg}</Text>
-        ))}
+        ))} */}
+        <FlatList
+        data={messages}
+        renderItem={({item}) => <Text key={item}>{item}</Text>}
+        keyExtractor={item => item}
+      />
         <TextInput
           value={message}
           autoCorrect={false}
